@@ -6,12 +6,12 @@ import { Directory } from './directory.entity';
 export class DirectoriesController {
   constructor(private readonly appService: DirectoriesService) {}
 
-  @Get("/all")
+  @Get()
   async getDirectories(){
     return await this.appService.getDirectories();
   }
-  @Get("/all")
-  async getOneDirectory(@Param() id :string){
+  @Get(":id")
+  async getOneDirectory(@Param() id :number){
     return await this.appService.getOneDirectory(id);
   }
 
