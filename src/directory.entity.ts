@@ -1,5 +1,4 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Email } from './email.entity';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Directory {
@@ -9,6 +8,6 @@ export class Directory {
   @Column()
   name: string;
 
-  @OneToMany(() => Email, (email) => email.directory)
-  emails: Email[];
+  @Column('simple-array')
+  emails: string[];
 }

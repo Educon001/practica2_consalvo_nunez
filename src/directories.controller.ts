@@ -1,18 +1,22 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { DirectoriesService } from './directories.service';
-import { Directory } from './directory.entity';
+import { DirectoryDto } from './directory.dto';
 
 @Controller('directories')
 export class DirectoriesController {
   constructor(private readonly appService: DirectoriesService) {}
 
   @Get()
-  async getDirectories(){
+  async getDirectories() {
     return await this.appService.getDirectories();
   }
-  @Get(":id")
-  async getOneDirectory(@Param() id :number){
-    return await this.appService.getOneDirectory(id);
+  @Get(':id')
+  async getOneDirectory(@Param() params: any) {
+    return await this.appService.getOneDirectory(params.id);
   }
 
+  @Post()
+  async createDirectory(@Body() directoryDto: DirectoryDto) {
+    return await this.appService.createDirectory(directoryDto);
+  }
 }
