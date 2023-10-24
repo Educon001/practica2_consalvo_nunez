@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 8000
 
 # Start the Nest.js application
-CMD ["npm", "start"]
+ENTRYPOINT ["entrypoint.sh"]

@@ -2,25 +2,13 @@ version: '3.9'
 
 services:
 
-  pr2-app:
-    build:
-      context: .  # Use the current directory as the build context
-      dockerfile: Dockerfile  # Use the Dockerfile in the current directory
-    ports:
-      - "8083:8000"  # Map host port 8083 to container port 8000
-    networks:
-        - pr2_net  # Connect the service to the network
-    depends_on:
-      postgres-db:  # Ensure that the database service is started before the web service
-        condition: service_healthy  # Wait until the database service is healthy
-
   postgres-db:
     image: postgres:16.0  # Use the official PostgreSQL 16 image
     restart: always
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 12345678
-      POSTGRES_DB: practica2
+      POSTGRES_DB: 'practica2'
     volumes:
       - ./postgres-data:/var/lib/postgresql/data  # Persist the database
     networks:
@@ -30,6 +18,24 @@ services:
       start_period: 30s
     ports:
       - "5432:5432"  # Map host port 5432 to container port 5432
+
+  pr2-app:
+    build:
+      context: .  # Use the current directory as the build context
+      dockerfile: Dockerfile  # Use the Dockerfile in the current directory
+    ports:
+      - "8083:8000"  # Map host port 8083 to container port 8000
+    environment:
+      DB_HOST: postgres-db
+      DB_NAME: practica2
+      DB_USER: postgres
+      DB_PASSWORD: 12345678
+    networks:
+        - pr2_net  # Connect the service to the network
+    depends_on:
+      postgres-db:  # Ensure that the database service is started before the web service
+        condition: service_healthy  # Wait until the database service is healthy
+
 
 # Define a volume for the database
 volumes:

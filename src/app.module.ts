@@ -6,22 +6,17 @@ import { Directory } from './directory.entity';
 import { DirectoriesController } from './directories.controller';
 import { DirectoriesService } from './directories.service';
 import { DirectoriesModule } from './directories.module';
+import * as process from 'process';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      // type: 'sqlite',
-      // database: 'database.sqlite',
-      // entities: [Directory],
-      // synchronize: true,
-      // logging: true,
-      // keepConnectionAlive: true,
       type: 'postgres',
-      host: 'localhost',
+      host: process.env.DB_HOST,
       port: 5432,
-      username: 'postgres',
-      password: '12345678',
-      database: 'practica2',
+      username: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_NAME,
       entities: [Directory],
     }),
     DirectoriesModule,
