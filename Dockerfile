@@ -17,4 +17,5 @@ COPY . .
 EXPOSE 8000
 
 # Start the Nest.js application
-ENTRYPOINT ["entrypoint.sh"]
+RUN chmod +x entrypoint.sh
+ENTRYPOINT ["/app/entrypoint.sh"]
