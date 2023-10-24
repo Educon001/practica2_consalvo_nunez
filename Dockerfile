@@ -8,6 +8,9 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install the application dependencies
+ENV HTTP_PROXY "http://proxylab.ucab.edu.ve:3128"
+ENV HTTPS_PROXY "http://proxylab.ucab.edu.ve:3128"
+RUN npm i -g typeorm
 RUN npm install
 
 # Copy the rest of the application source code to the working directory
