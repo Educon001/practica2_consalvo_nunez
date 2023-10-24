@@ -8,9 +8,9 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 12345678
-      POSTGRES_DB: 'practica2'
+      POSTGRES_DB: practica2
     volumes:
-      - ./postgres-data:/var/lib/postgresql/data  # Persist the database
+      - postgres_data:/var/lib/postgresql/data  # Persist the database
     networks:
       - pr2_net # Connect the service to the network
     healthcheck:
@@ -39,7 +39,7 @@ services:
 
 # Define a volume for the database
 volumes:
-  postgres-data:
+  postgres_data:
 
 # Define a network for the services to communicate
 networks:
