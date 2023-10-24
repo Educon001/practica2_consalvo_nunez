@@ -8,7 +8,7 @@
 
 # Apply any necessary database migrations using TypeORM
 typeorm migration:create ./src/migrations/InitialMigration
-typeorm migration:run -d ./ormconfig.json
+typeorm migration:run -d ./src/config.typeorm.ts
 
 # Start your Nest.js application
 npm start
