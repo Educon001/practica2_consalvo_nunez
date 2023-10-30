@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 import { DirectoriesService } from './directories.service';
 import { DirectoryDto } from './directory.dto';
 
@@ -19,11 +19,14 @@ export class DirectoriesController {
   async createDirectory(@Body() directoryDto: DirectoryDto) {
     return await this.appService.createDirectory(directoryDto);
   }
-  @Patch()
-  async updateDirectory(@Body() directoryDto: DirectoryDto) {
-    return await this.appService.createDirectory(directoryDto);
+  @Patch(':id')
+  async updateDirectory(@Param() params: any, @Body() directoryDto: DirectoryDto) {
+    return await this.appService.updateDirectory(params.id, directoryDto);
   }
 
-
+  @Delete(':id')
+  async deleteDirectory(@Param() params: any) {
+    return await this.appService.deleteDirectory(params.id);
+  }
 
 }

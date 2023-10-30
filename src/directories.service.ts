@@ -29,4 +29,15 @@ export class DirectoriesService {
 
     return newDirectory;
   }
+
+  async updateDirectory(id: number, directoryDto: DirectoryDto): Promise<Directory> {
+   await this.directory.update(id, directoryDto);
+   return 
+  }
+
+  async deleteDirectory(id: number): Promise<Directory> {
+    await this.directory.delete(id)
+    return 
+   }
+
 }
