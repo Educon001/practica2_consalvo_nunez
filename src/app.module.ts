@@ -6,6 +6,7 @@ import { DirectoriesController } from './directories.controller';
 import { DirectoriesService } from './directories.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import typeorm from './config/typeorm';
+import { DirectoriesModule } from './directories.module';
 
 @Module({
   imports: [

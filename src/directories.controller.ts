@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { DirectoriesService } from './directories.service';
 import { DirectoryDto } from './directory.dto';
 
@@ -19,4 +19,11 @@ export class DirectoriesController {
   async createDirectory(@Body() directoryDto: DirectoryDto) {
     return await this.appService.createDirectory(directoryDto);
   }
+  @Patch()
+  async updateDirectory(@Body() directoryDto: DirectoryDto) {
+    return await this.appService.createDirectory(directoryDto);
+  }
+
+
+
 }
