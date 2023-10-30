@@ -28,7 +28,8 @@ export class DirectoriesController {
   async deleteDirectory(@Param() params: any) {
     return await this.appService.deleteDirectory(params.id);
   }
-@Put(':id')
+  
+  @Put(':id')
   async updateDirectory(@Param() params: any, @Body() directoryDto: DirectoryDto) {
     return await this.appService.updateDirectory(params.id, directoryDto);
   }
