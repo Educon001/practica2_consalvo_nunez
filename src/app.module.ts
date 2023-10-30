@@ -18,6 +18,7 @@ import typeorm from './config/typeorm';
       useFactory: async (configService: ConfigService) =>
         configService.get('typeorm'),
     }),
+    DirectoriesMOdule,
   ],
   controllers: [AppController, DirectoriesController],
   providers: [AppService, DirectoriesService],
