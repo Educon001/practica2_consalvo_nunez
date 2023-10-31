@@ -30,7 +30,7 @@ export class DirectoriesController {
   }
   
   @Put(':id')
-  async updateDirectory(@Param() params: any, @Body() directoryDto: DirectoryDto) {
+  async putDirectory(@Param() params: any, @Body() directoryDto: DirectoryDto) {
     return await this.appService.updateDirectory(params.id, directoryDto);
   }
 
