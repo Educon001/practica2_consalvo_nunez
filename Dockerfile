@@ -11,7 +11,7 @@ COPY package*.json ./
 ENV HTTP_PROXY "http://proxylab.ucab.edu.ve:3128"
 ENV HTTPS_PROXY "http://proxylab.ucab.edu.ve:3128"
 RUN npm i -g typeorm
-RUN npm install
+RUN npm install --unsafe-perm
 
 # Copy the rest of the application source code to the working directory
 COPY . .
