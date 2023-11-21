@@ -22,5 +22,5 @@ EXPOSE 8000
 # Start the Nest.js application
 RUN chmod +x entrypoint.sh \
     && mkdir -p /app/dist \
-    && chmod g+wd /app/dist
+    && chmod g+w+d /app/dist
 ENTRYPOINT ["/app/entrypoint.sh"]
