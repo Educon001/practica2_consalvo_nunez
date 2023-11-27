@@ -1,13 +1,13 @@
 kind: Template
 apiVersion: v1
 metadata:
-  name: cn-p2-simple-ws-template
+  name: pr2-app
   annotations:
     description: >-
-      Platilla de despliegue para cn-p2-simple-ws
-    tags: "dajngo,python"
-    openshift.io/documentation-url: "https://gitlab.com/rjrodrig/cn-p2-simple-ws"
-    openshift.io/suport-url: "https://gitlab.com/rjrodrig/cn-p2-simple-ws"
+      Platilla de despliegue para pr2-app
+    tags: "nestjs, node, typescript"
+    openshift.io/documentation-url: "https://github.com/Educon001/practica2_consalvo_nunez"
+    openshift.io/suport-url: "https://github.com/Educon001/practica2_consalvo_nunez"
 
 parameters:
   - name: APP_NAME
@@ -16,11 +16,11 @@ parameters:
   
   - name: DB_NAME
     description: Nombre de la base de datos.
-    value: cnp2simple
+    value: practica5
 
   - name: DB_USR
     description: Nombre de usario para conexión a la base de datos.
-    value: cnp2simple
+    value: postgres
 
   - name: DB_PWD
     description: Password de usuario para conexión a la base de datos.
@@ -197,30 +197,25 @@ objects:
             failurePolicy: Abort
             execNewPod:
               containerName: appserver
-              command:
-                - entrypoint.sh
+              command: ["/app/entrypoint.sh"]
               env:
-                - name: DJANGO_DATABASES_DEFAULT_NAME
+                - name: DB_NAME
                   valueFrom:
                     secretKeyRef:
                       name: "${APP_NAME}-keys"
                       key: db_name
-                - name: DJANGO_DATABASES_DEFAULT_USER
+                - name: DB_USER
                   valueFrom:
                     secretKeyRef:
                       name: "${APP_NAME}-keys"
                       key: db_usr
-                - name: DJANGO_DATABASES_DEFAULT_PASSWORD
+                - name: DB_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: "${APP_NAME}-keys"
                       key: db_pwd
-                - name: DJANGO_DATABASES_DEFAULT_HOST
+                - name: DB_HOST
                   value: ${APP_NAME}-pgsql.${PROJECT_NAME}.svc
-                - name: DJANGO_ALLOWED_HOSTS
-                  value: '*'
-                - name: DO_MIGRATE
-                  value: "true"
       template:
         metadata:
           labels:
@@ -228,31 +223,29 @@ objects:
             name: "${APP_NAME}-appserver"
         spec:
           containers:
-            - image: 'eltercera/cn-p2-simple-ws'
+            - image: 'emconsalvo20/pr2-app'
               imagePullPolicy: Always
               name: appserver
               args:
                 - appserver
               env:
-                - name: DJANGO_DATABASES_DEFAULT_NAME
+                - name: DB_NAME
                   valueFrom:
                     secretKeyRef:
                       name: "${APP_NAME}-keys"
                       key: db_name
-                - name: DJANGO_DATABASES_DEFAULT_USER
+                - name: DB_USER
                   valueFrom:
                     secretKeyRef:
                       name: "${APP_NAME}-keys"
                       key: db_usr
-                - name: DJANGO_DATABASES_DEFAULT_PASSWORD
+                - name: DB_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: "${APP_NAME}-keys"
                       key: db_pwd
-                - name: DJANGO_DATABASES_DEFAULT_HOST
+                - name: DB_HOST
                   value: ${APP_NAME}-pgsql.${PROJECT_NAME}.svc
-                - name: DJANGO_ALLOWED_HOSTS
-                  value: '*'
               ports:
                 - containerPort: 8000
                   protocol: TCP
