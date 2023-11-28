@@ -190,32 +190,6 @@ objects:
       replicas: 1
       selector:
         name: "${APP_NAME}-appserver"
-      strategy:
-        type: Recreate
-        recreateParams:
-          mid:
-            failurePolicy: Abort
-            execNewPod:
-              containerName: appserver
-              command: ["/app/entrypoint.sh"]
-              env:
-                - name: DB_NAME
-                  valueFrom:
-                    secretKeyRef:
-                      name: "${APP_NAME}-keys"
-                      key: db_name
-                - name: DB_USER
-                  valueFrom:
-                    secretKeyRef:
-                      name: "${APP_NAME}-keys"
-                      key: db_usr
-                - name: DB_PASSWORD
-                  valueFrom:
-                    secretKeyRef:
-                      name: "${APP_NAME}-keys"
-                      key: db_pwd
-                - name: DB_HOST
-                  value: ${APP_NAME}-pgsql.${PROJECT_NAME}.svc
       template:
         metadata:
           labels:
