@@ -1,4 +1,4 @@
 APP_NAME="pr2-app"
-DB_PWD="12345678"
+DB_PWD="postgres"
 DOMAIN_NAME="consalvonunez.okd-dev.ucab.edu.ve"
 PROJECT_NAME="pj-emconsalvo-20"
