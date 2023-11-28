@@ -251,8 +251,8 @@ objects:
                   protocol: TCP
               resources:
                 limits:
-                  memory: "1G"
+                  memory: "512M"
                 requests:
-                  memory: "1G"
+                  memory: "512M"
           restartPolicy: Always
       test: false
