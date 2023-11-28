@@ -16,7 +16,7 @@ parameters:
   
   - name: DB_NAME
     description: Nombre de la base de datos.
-    value: practica5
+    value: postgres
 
   - name: DB_USR
     description: Nombre de usario para conexión a la base de datos.
