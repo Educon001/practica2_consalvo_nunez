@@ -23,5 +23,6 @@ EXPOSE 8000
 RUN chmod +x entrypoint.sh \
     && mkdir -p /app/dist \
     && chmod g+w /app/dist \
-    && chmod g+w /app
+    && chmod g+w /app \
+    && chmod g+w /.npm
 ENTRYPOINT ["/app/entrypoint.sh"]
